@@ -85,16 +85,6 @@ if (!empty($custommenu)) {
 <div class="row">
     <div id="mrooms-footer" class="helplink col-sm-6">
         <small>
-            <?php
-            if ($OUTPUT->page_doc_link()) {
-                echo $OUTPUT->page_doc_link();
-                echo "<br>";
-            }
-            echo get_string('poweredbyrunby', 'theme_snap', (object) [
-                    'subdomain' => $this->get_poweredby_subdomain(),
-                    'year'      => date('Y', time())
-            ]);
-            ?>
         </small>
     </div>
     <div class="langmenu col-sm-6 text-right">
@@ -112,7 +102,6 @@ echo
 ?>
 <div id="page-footer">
 <br/>
-<?php echo $OUTPUT->standard_footer_html(); ?>
 <?php echo $OUTPUT->debug_footer_html(); ?>
 </div>
 </footer>
