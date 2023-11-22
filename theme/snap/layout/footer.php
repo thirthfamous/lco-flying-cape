@@ -27,85 +27,86 @@ defined('MOODLE_INTERNAL') || die();
 ?>
 
 <footer id="moodle-footer" role="contentinfo" class="clearfix">
-<?php
-/* Snap custom footer.*/
-/* Custom footer edit buttons. */
-$footnote = empty($PAGE->theme->settings->footnote) ? '' : $PAGE->theme->settings->footnote;
-$footnote = format_text($footnote, FORMAT_HTML, ['noclean' => true]);
+    <?php
+    /* Snap custom footer.*/
+    /* Custom footer edit buttons. */
+    $footnote = empty($PAGE->theme->settings->footnote) ? '' : $PAGE->theme->settings->footnote;
+    $footnote = format_text($footnote, FORMAT_HTML, ['noclean' => true]);
 
-$custommenu = $OUTPUT->custom_menu();
-if (!empty($custommenu) && $this->page->user_is_editing() && $PAGE->pagetype == 'site-index') {
-    $url = new moodle_url('/admin/settings.php', ['section' => 'themesettings'], 'id_s__custommenuitems');
-    $link = html_writer::link($url, get_string('editcustommenu', 'theme_snap'), ['class' => 'btn btn-primary btn-sm']);
-    $custommenu .= '<p class="text-right">'.$link.'</p>';
-}
+    $custommenu = $OUTPUT->custom_menu();
+    if (!empty($custommenu) && $this->page->user_is_editing() && $PAGE->pagetype == 'site-index') {
+        $url = new moodle_url('/admin/settings.php', ['section' => 'themesettings'], 'id_s__custommenuitems');
+        $link = html_writer::link($url, get_string('editcustommenu', 'theme_snap'), ['class' => 'btn btn-primary btn-sm']);
+        $custommenu .= '<p class="text-right">' . $link . '</p>';
+    }
 
 
-/* Snap main footer. */
-echo '<div id="snap-site-footer">';
-if (!empty($footnote)) {
-    echo '<div id="snap-footer-content">';
-    echo $footnote;
+    /* Snap main footer. */
+    echo '<div id="snap-site-footer">';
+    if (!empty($footnote)) {
+        echo '<div id="snap-footer-content">';
+        echo $footnote;
+        echo '</div>';
+    }
+    /* Social media links. */
+    $socialmedialinks = '';
+    if (!empty($PAGE->theme->settings->facebook)) {
+        $socialmedialinks .= $this->social_menu_link('facebook', $PAGE->theme->settings->facebook);
+    }
+    if (!empty($PAGE->theme->settings->twitter)) {
+        $socialmedialinks .= $this->social_menu_link('twitter', $PAGE->theme->settings->twitter);
+    }
+    if (!empty($PAGE->theme->settings->linkedin)) {
+        $socialmedialinks .= $this->social_menu_link('linkedin', $PAGE->theme->settings->linkedin);
+    }
+    if (!empty($PAGE->theme->settings->youtube)) {
+        $socialmedialinks .= $this->social_menu_link('youtube', $PAGE->theme->settings->youtube);
+    }
+    if (!empty($PAGE->theme->settings->instagram)) {
+        $socialmedialinks .= $this->social_menu_link('instagram', $PAGE->theme->settings->instagram);
+    }
+    if (!empty($socialmedialinks)) {
+        echo '<div id="snap-socialmedia-links">' . $socialmedialinks . '</div>';
+    }
     echo '</div>';
-}
-/* Social media links. */
-$socialmedialinks = '';
-if (!empty($PAGE->theme->settings->facebook)) {
-    $socialmedialinks .= $this->social_menu_link('facebook', $PAGE->theme->settings->facebook);
-}
-if (!empty($PAGE->theme->settings->twitter)) {
-    $socialmedialinks .= $this->social_menu_link('twitter', $PAGE->theme->settings->twitter);
-}
-if (!empty($PAGE->theme->settings->linkedin)) {
-    $socialmedialinks .= $this->social_menu_link('linkedin', $PAGE->theme->settings->linkedin);
-}
-if (!empty($PAGE->theme->settings->youtube)) {
-    $socialmedialinks .= $this->social_menu_link('youtube', $PAGE->theme->settings->youtube);
-}
-if (!empty($PAGE->theme->settings->instagram)) {
-    $socialmedialinks .= $this->social_menu_link('instagram', $PAGE->theme->settings->instagram);
-}
-if (!empty($socialmedialinks)) {
-    echo '<div id="snap-socialmedia-links">' .$socialmedialinks. '</div>';
-}
-echo '</div>';
-?>
+    ?>
 
-<?php
-/* Moodle custom menu. */
-/* We need to render the custom menu in the footer in mobile views. */
+    <?php
+    /* Moodle custom menu. */
+    /* We need to render the custom menu in the footer in mobile views. */
 
-if (!empty($custommenu)) {
-    echo '<div id="snap-custom-menu-footer"><br>';
-    echo $custommenu;
-    echo '</div>';
-}
-?>
+    if (!empty($custommenu)) {
+        echo '<div id="snap-custom-menu-footer"><br>';
+        echo $custommenu;
+        echo '</div>';
+    }
+    ?>
 
-<div class="row">
-    <div id="mrooms-footer" class="helplink col-sm-6">
-        <small>
-        </small>
+    <div class="row">
+        <div id="mrooms-footer" class="helplink col-sm-6">
+            <small>
+            </small>
+        </div>
+        <div class="langmenu col-sm-6 text-right">
+            <?php echo $OUTPUT->lang_menu(); ?>
+        </div>
     </div>
-    <div class="langmenu col-sm-6 text-right">
-        <?php echo $OUTPUT->lang_menu(); ?>
-    </div>
-</div>
-<?php
-$tittle = get_string('totop', 'theme_snap');
-echo
+    <?php
+    $tittle = get_string('totop', 'theme_snap');
+    echo
     '<div id="goto-top-link">
         <a class="btn btn-light" role="button" href="javascript:void(0)">
-            <i class="icon fa fa-arrow-up fa-fw" title="' . $tittle .'" aria-label="'. $tittle .'"></i>
+            <i class="icon fa fa-arrow-up fa-fw" title="' . $tittle . '" aria-label="' . $tittle . '"></i>
         </a>
     </div>'
-?>
-<div id="page-footer">
-<br/>
-<?php echo $OUTPUT->debug_footer_html(); ?>
-</div>
+    ?>
+    <div id="page-footer">
+        <br />
+        <?php echo $OUTPUT->debug_footer_html(); ?>
+    </div>
 </footer>
 <?php echo $OUTPUT->standard_end_of_body_html(); ?>
 <!-- bye! -->
 </body>
+
 </html>
