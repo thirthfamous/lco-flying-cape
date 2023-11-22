@@ -23,7 +23,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require(__DIR__.'/header.php');
+require(__DIR__ . '/header.php');
 
 use theme_snap\local;
 use theme_snap\output\shared;
@@ -53,139 +53,131 @@ if ($PAGE->pagetype == "mod-lightboxgallery-view" && $PAGE->user_allowed_editing
 
 <!-- Moodle js hooks -->
 <div id="page">
-<div id="page-content">
+    <div id="page-content">
 
-<!--
+        <!--
 ////////////////////////// MAIN  ///////////////////////////////
 -->
-<main id="moodle-page" class="clearfix">
-<?php
-echo $OUTPUT->custom_menu_spacer();
-?>
-<div id="page-header" class="clearfix <?php echo $mastimage; ?>">
-    <?php if ($PAGE->pagetype !== 'site-index') { ?>
-        <div class="breadcrumb-nav" aria-label="breadcrumb"><?php echo $OUTPUT->snapnavbar($mastimage); ?></div>
-    <?php }
-        if ($carousel) {
-            // Front page carousel.
-            echo $carousel;
-        } else {
-            // Front page banner image.
-    ?>
-        <div id="page-mast">
-        <?php
-            echo $OUTPUT->page_heading();
-            echo $OUTPUT->course_header();
-            // Content bank for Snap.
-            if ($PAGE->pagetype === 'contentbank') {
-                echo $OUTPUT->snap_content_bank();
+        <main id="moodle-page" class="clearfix">
+            <?php
+            echo $OUTPUT->custom_menu_spacer();
+
+            ?>
+            <?php
+            if ($PAGE->pagetype == 'site-index') {
+                $headcontext = [
+                    'image' => $OUTPUT->image_url('head', 'theme')
+                ];
+                echo $OUTPUT->render_from_template('theme_snap/head', $headcontext);
             }
-        ?>
-        </div>
-        <?php
-            if ($this->page->user_is_editing() && $PAGE->pagetype == 'site-index') {
-                echo $OUTPUT->cover_image_selector();
+            if ($PAGE->pagetype == 'admin-search') {
+                echo implode('', $PAGE->get_header_actions());
             }
-        } // End else.
-        if ($PAGE->pagetype == 'admin-search') {
-            echo implode('', $PAGE->get_header_actions());
-        }
-        ?>
-</div>
-<div id="region-main-box">
-<section id="region-main">
-<?php
-echo $OUTPUT->course_content_header();
+            ?>
+            <div id="region-main-box">
+                <section id="region-main">
+                    <?php
+                    echo $OUTPUT->course_content_header();
 
-// Ensure edit blocks button is only shown for appropriate pages.
-if ($PAGE->button === null) {
-    $hasadminbutton = false;
-} else {
-    $hasadminbutton = stripos($PAGE->button, '"adminedit"') || stripos($PAGE->button, '"edit"');
-}
+                    // Ensure edit blocks button is only shown for appropriate pages.
+                    if ($PAGE->button === null) {
+                        $hasadminbutton = false;
+                    } else {
+                        $hasadminbutton = stripos($PAGE->button, '"adminedit"') || stripos($PAGE->button, '"edit"');
+                    }
 
-if ($hasadminbutton) {
-    // List paths to black list for 'turn editting on' button here.
-    // Note, to use regexs start and end with a pipe symbol - e.g. |^/report/| .
-    $editbuttonblacklist = array(
-        '/comment/',
-        '/cohort/index.php',
-        '|^/report/|',
-        '|^/admin/|',
-        '|^/mod/data/|',
-        '/tag/manage.php',
-        '/grade/edit/scale/index.php',
-        '/outcome/admin.php',
-        '/mod/assign/adminmanageplugins.php',
-        '/theme/index.php',
-        '/user/editadvanced.php',
-        '/user/profile/index.php',
-        '/mnet/service/enrol/index.php',
-        '/local/mrooms/view.php',
-    );
-    $pagepath = local::current_url_path();
+                    if ($hasadminbutton) {
+                        // List paths to black list for 'turn editting on' button here.
+                        // Note, to use regexs start and end with a pipe symbol - e.g. |^/report/| .
+                        $editbuttonblacklist = array(
+                            '/comment/',
+                            '/cohort/index.php',
+                            '|^/report/|',
+                            '|^/admin/|',
+                            '|^/mod/data/|',
+                            '/tag/manage.php',
+                            '/grade/edit/scale/index.php',
+                            '/outcome/admin.php',
+                            '/mod/assign/adminmanageplugins.php',
+                            '/theme/index.php',
+                            '/user/editadvanced.php',
+                            '/user/profile/index.php',
+                            '/mnet/service/enrol/index.php',
+                            '/local/mrooms/view.php',
+                        );
+                        $pagepath = local::current_url_path();
 
-    foreach ($editbuttonblacklist as $blacklisted) {
-        if ($blacklisted[0] == '|' && $blacklisted[strlen($blacklisted) - 1] == '|') {
-            // Use regex to determine blacklisting.
-            if (preg_match ($blacklisted, $pagepath) === 1) {
-                // This url path is blacklisted, stop button from being displayed.
-                $PAGE->set_button('');
-            }
-        } else if ($pagepath == $blacklisted) {
-            // This url path is blacklisted, stop button from being displayed.
-            $PAGE->set_button('');
-        }
-    }
-}
-echo "<div class='snap-page-heading-button' >";
-if ($PAGE->pagelayout !== 'admin') {
-    echo $OUTPUT->page_heading_button();
-}
-// Validation added to check if settings option should be displayed;
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !local::show_setting_menu() ;
-$regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-echo $regionmainsettingsmenu;
-echo "</div>";
-if ($PAGE->pagelayout === 'mycourses') {
-    // Add kebab menu for course management options in my courses page.
-    echo $OUTPUT->snap_my_courses_management_options();
-}
-if ($PAGE->pagelayout === 'frontpage' && $PAGE->pagetype === 'site-index') {
-    require(__DIR__.'/faux_site_index.php');
-} else {
-    echo $OUTPUT->activity_header();
-    if ($PAGE->has_secondary_navigation() && $PAGE->pagetype == 'mod-data-view') {
-        $tablistnav = $PAGE->has_tablist_secondary_navigation();
-        $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
-        $secondarynavigation = $moremenu->export_for_template($OUTPUT);
-        echo $OUTPUT->render_from_template('theme_snap/secondary_navigation', ['secondarymoremenu' => $secondarynavigation]);
-    }
-    echo $OUTPUT->main_content();
-}
+                        foreach ($editbuttonblacklist as $blacklisted) {
+                            if ($blacklisted[0] == '|' && $blacklisted[strlen($blacklisted) - 1] == '|') {
+                                // Use regex to determine blacklisting.
+                                if (preg_match($blacklisted, $pagepath) === 1) {
+                                    // This url path is blacklisted, stop button from being displayed.
+                                    $PAGE->set_button('');
+                                }
+                            } else if ($pagepath == $blacklisted) {
+                                // This url path is blacklisted, stop button from being displayed.
+                                $PAGE->set_button('');
+                            }
+                        }
+                    }
+                    echo "<div class='snap-page-heading-button' >";
+                    if ($PAGE->pagelayout !== 'admin') {
+                        echo $OUTPUT->page_heading_button();
+                    }
+                    // Validation added to check if settings option should be displayed;
+                    $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !local::show_setting_menu();
+                    $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+                    echo $regionmainsettingsmenu;
+                    echo "</div>";
+                    if ($PAGE->pagelayout === 'mycourses') {
+                        // Add kebab menu for course management options in my courses page.
+                        echo $OUTPUT->snap_my_courses_management_options();
+                    }
+                    if ($PAGE->pagelayout === 'frontpage' && $PAGE->pagetype === 'site-index') {
+                        require(__DIR__ . '/faux_site_index.php');
+                    } else {
+                        echo $OUTPUT->activity_header();
+                        if ($PAGE->has_secondary_navigation() && $PAGE->pagetype == 'mod-data-view') {
+                            $tablistnav = $PAGE->has_tablist_secondary_navigation();
+                            $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+                            $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+                            echo $OUTPUT->render_from_template('theme_snap/secondary_navigation', ['secondarymoremenu' => $secondarynavigation]);
+                        }
+                        echo $OUTPUT->main_content();
+                    }
 
-echo $OUTPUT->activity_navigation();
-echo $OUTPUT->course_content_footer();
-if (stripos($PAGE->bodyclasses, 'format-singleactivity') !== false ) {
-    // Shared renderer is only loaded if required at this point.
-    $output = \theme_snap\output\shared::course_tools();
-    if (!empty($output)) {
-        echo $output;
-    }
-}
+                    echo $OUTPUT->activity_navigation();
+                    echo $OUTPUT->course_content_footer();
+                    if (stripos($PAGE->bodyclasses, 'format-singleactivity') !== false) {
+                        // Shared renderer is only loaded if required at this point.
+                        $output = \theme_snap\output\shared::course_tools();
+                        if (!empty($output)) {
+                            echo $output;
+                        }
+                    }
+                    if ($PAGE->pagetype == 'site-index') {
 
-?>
+                        $image_start_context = [
+                            'img_1' => '',
+                            'img_1' => '',
+                            'img_1' => '',
+                            'image_start' => $OUTPUT->image_url('LMS2', 'theme')
+                        ];
+                        echo $OUTPUT->render_from_template('theme_snap/start_learning', $image_start_context);
+                    }
 
-</section>
-</div>
+                    ?>
 
-<?php require(__DIR__.'/moodle-blocks.php'); ?>
-</main>
+                </section>
+            </div>
 
-</div>
+            <?php require(__DIR__ . '/moodle-blocks.php'); ?>
+        </main>
+
+    </div>
 </div>
 
 <?php echo $OUTPUT->standard_after_main_region_html() ?>
 <!-- close moodle js hooks -->
 <?php // @codingStandardsIgnoreEnd
-require(__DIR__.'/footer.php');
+require(__DIR__ . '/footer.php');

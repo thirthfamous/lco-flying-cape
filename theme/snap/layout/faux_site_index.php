@@ -92,23 +92,7 @@ foreach (explode(',', $frontpagelayout) as $section) {
 
         case FRONTPAGEALLCOURSELIST:
             $availablecourseshtml = $courserenderer->frontpage_available_courses();
-            if (!empty($availablecourseshtml)) {
-                echo html_writer::tag('a',
-                    get_string('skipa', 'access', core_text::strtolower(get_string('availablecourses'))),
-                    array('href' => '#skipavailablecourses', 'class' => 'skip-block')
-                );
-
-                // Wrap frontpage course list in div container.
-                echo html_writer::start_tag('div', array('id' => 'frontpage-course-list'));
-
-                echo $OUTPUT->heading(get_string('availablecourses'));
-                echo $availablecourseshtml;
-
-                // End frontpage course list div container.
-                echo html_writer::end_tag('div');
-
-                echo html_writer::tag('span', '', array('class' => 'skip-block-to', 'id' => 'skipavailablecourses'));
-            }
+            
         break;
 
         case FRONTPAGECATEGORYNAMES:
