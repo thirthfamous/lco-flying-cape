@@ -3933,7 +3933,7 @@ table th img.iconhelp {
     padding: 2em 4%;
     text-align: center;
     .snap-feature {
-        background-color: $feature-spot-background-color;
+        height: 100%;
     }
     .snap-feature-text {
         color: $feature-spot-description-color;
@@ -3972,9 +3972,24 @@ table th img.iconhelp {
     }
     h3.snap-feature-title {
         margin: 1rem 0 1rem 0;
-        line-height: 40px;
+        line-height: 30px;
         color: $feature-spot-title-color;
+
+        @media (max-width:1011px) {
+            height: 50px;
+        }
+
+        @media (max-width:575px) {
+            height: 20px;
+        }
+
+        @media (max-width:767px) {
+            line-height: 20px;
+        }
     }
+
+
+
     #admin-feature_spot_title_color,
     #admin-feature_spot_background_color,
     #admin-feature_spot_description_color {
