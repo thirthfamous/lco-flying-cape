@@ -5,6 +5,7 @@
         margin-top: 100px;
         background: rgb(216, 231, 240);
         background: linear-gradient(0deg, rgba(216, 231, 240, 1) 0%, rgba(74, 165, 255, 1) 45%, rgba(36, 88, 141, 1) 94%);
+        padding-bottom: 50px;
     }
 
     .content-head-section-text {
@@ -25,8 +26,6 @@
         color: #fff;
     }
 
-    .content-head-section-image {}
-
     @media only screen and (max-width:987px) {
         .head-section {
             flex-wrap: wrap;
@@ -36,6 +35,16 @@
 
         .content-head-section-text div {
             margin: 1em;
+        }
+
+        .head-section {
+            margin-top: 0px;
+        }
+    }
+
+    @media only screen and (max-width:414px) {
+        .content-head-section-text div h1 {
+            font-size: 28px;
         }
     }
 </style>
