@@ -1,13 +1,54 @@
+<style>
+    .head-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 100px;
+        background: rgb(216, 231, 240);
+        background: linear-gradient(0deg, rgba(216, 231, 240, 1) 0%, rgba(74, 165, 255, 1) 45%, rgba(36, 88, 141, 1) 94%);
+    }
+
+    .content-head-section-text {
+        display: flex;
+    }
+
+    .content-head-section-text div {
+        margin: 2em;
+    }
+
+    .content-head-section-text div h1 {
+        color: #fff;
+        font-weight: bold;
+        font-size: 60px;
+    }
+
+    .content-head-section-text div p {
+        color: #fff;
+    }
+
+    .content-head-section-image {}
+
+    @media only screen and (max-width:987px) {
+        .head-section {
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .content-head-section-text div {
+            margin: 1em;
+        }
+    }
+</style>
+
 <div style="padding: 2px; ">
-    <section style="display: flex; margin-top: 100px;background: rgb(36,88,141);
-background: linear-gradient(180deg, rgba(36,88,141,1) 0%, rgba(99,141,184,1) 61%, rgba(216,231,240,1) 100%);">
-        <div style="flex: 1; display: flex; flex-direction: column; ">
-            <div style="margin-top: 5em; margin-left: 5em;">
-                <h1 style="color: #fff; font-weight: bold; font-size: 60px;">Flying Cape LMS - Learning it Smarter</h1>
-                <p style="color: #fff;">Personalized learning to let you study at your own pace.</p>
+    <section class="head-section">
+        <div class="content-head-section-text">
+            <div>
+                <h1>Flying Cape LMS - Learning it Smarter</h1>
+                <p>Personalized learning to let you study at your own pace.</p>
             </div>
         </div>
-        <div style="flex: 1;">
+        <div class="content-head-section-image">
             <img src="{{image}}" style="width: 100%; height: 100%;" alt="">
         </div>
     </section>
