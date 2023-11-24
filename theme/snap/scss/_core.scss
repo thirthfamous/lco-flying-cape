@@ -1013,7 +1013,7 @@ a.yui3-button,
 // Snap theme elements and components.
 // -----------------------------------
 
-#page-header,
+
 #page-login-index #page {
     @include bg-cover;
 }
@@ -1366,7 +1366,6 @@ footer #moodle-footer
     display: inline-block;
     padding: .5em 0;
     width: 19em;
-    max-width: 20%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
