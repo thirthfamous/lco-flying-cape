@@ -1473,7 +1473,14 @@ class local {
         $css = '';
         $coverurl = self::course_coverimage_url($courseid);
         if ($coverurl) {
-            $css = "#page-header {background-image: url($coverurl);}";
+            $css = "
+            #page-header {
+                background: url($coverurl), linear-gradient(0deg, rgba(216, 231, 240, 1) 0%, rgba(74, 165, 255, 1) 45%, rgba(36, 88, 141, 1) 94%);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: contain, cover;
+            }
+            ";
         }
         return $css;
     }
