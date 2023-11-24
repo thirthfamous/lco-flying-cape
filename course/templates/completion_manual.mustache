@@ -26,9 +26,12 @@
         "overallincomplete": false
     }
 }}
-{{#istrackeduser}}
+
+<div style="text-align: right; background-color: #f8f9fa; padding: 20px 10px">
+
+    {{#istrackeduser}}
     {{#overallcomplete}}
-        <button class="btn btn-success btn-sm text-nowrap" data-action="toggle-manual-completion" data-toggletype="manual:undo" data-cmid="{{cmid}}" data-activityname="{{activityname}}" data-withavailability="{{withavailability}}" {{!
+        <button class="btn btn-mark-as-done btn-success btn-sm text-nowrap" data-action="toggle-manual-completion" data-toggletype="manual:undo" data-cmid="{{cmid}}" data-activityname="{{activityname}}" data-withavailability="{{withavailability}}" {{!
         }}{{#accessibledescription}}{{!
             }}title="{{.}}" {{!
             }}aria-label="{{.}}" {{!
@@ -41,7 +44,7 @@
         </button>
     {{/overallcomplete}}
     {{#overallincomplete}}
-        <button class="btn btn-outline-secondary btn-sm text-nowrap" data-action="toggle-manual-completion" data-toggletype="manual:mark-done" data-cmid="{{cmid}}" data-activityname="{{activityname}}" data-withavailability="{{withavailability}}" {{!
+        <button class="btn btn-mark-as-done btn-outline-secondary btn-sm text-nowrap" data-action="toggle-manual-completion" data-toggletype="manual:mark-done" data-cmid="{{cmid}}" data-activityname="{{activityname}}" data-withavailability="{{withavailability}}" {{!
         }}{{#accessibledescription}}{{!
             }}title="{{.}}" {{!
             }}aria-label="{{.}}" {{!
@@ -53,13 +56,14 @@
             {{#str}} completion_manual:markdone, core_course {{/str}}
         </button>
     {{/overallincomplete}}
-{{/istrackeduser}}
-{{^istrackeduser}}
+    {{/istrackeduser}}
+    {{^istrackeduser}}
     <button class="btn btn-outline-secondary btn-sm text-nowrap" disabled>
         {{#str}} completion_manual:markdone, core_course {{/str}}
     </button>
-{{/istrackeduser}}
+    {{/istrackeduser}}
 
+</div>
 {{#js}}
 require(['core_course/manual_completion_toggle'], toggle => {
     toggle.init()
