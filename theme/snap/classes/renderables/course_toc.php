@@ -229,6 +229,10 @@ class course_toc implements \renderable, \templatable {
             if ($chapter->title == get_string('general')) {
                 $chapter->title = get_string('introduction', 'theme_snap');
             }
+            
+            if (strtolower($chapter->title) === "introduction" ) {
+                $chapter->title = "Course Overview";
+            }
 
             if ($this->format->is_section_current($section)) {
                 $chapter->iscurrent = true;

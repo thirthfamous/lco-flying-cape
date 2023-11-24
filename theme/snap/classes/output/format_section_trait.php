@@ -307,6 +307,9 @@ trait format_section_trait {
             if ($section->section != 0 && $leftnavtop != 0 ) {
                 $sectiontitle = '<span class=\'sectionnumber\'></span>' . $sectiontitle;
             }
+            if (strtolower($sectiontitle) === "introduction") {
+                $sectiontitle = "Course Overview";
+            }
             $o .= "<div>" . $output->heading($sectiontitle, 2, 'sectionname' . $classes) . "</div>";
         }
 

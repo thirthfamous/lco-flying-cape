@@ -94,7 +94,10 @@ $editoroptions = array(
 );
 
 $courseformat = course_get_format($course);
-$defaultsectionname = $courseformat->get_default_section_name($section);
+// $defaultsectionname = $courseformat->get_default_section_name($section);
+$defaultsectionname = "Course Overview";
+
+
 
 $customdata = array(
     'cs' => $sectioninfo,
