@@ -6,12 +6,6 @@
         font-size: 60px;
     }
 
-    @media (max-width:1199px) {
-        .main-text {
-            font-size: 50px;
-        }
-    }
-
     .gradient-section {
         background: rgb(216, 231, 240);
         background: linear-gradient(0deg, rgba(216, 231, 240, 1) 0%, rgba(74, 165, 255, 1) 45%, rgba(36, 88, 141, 1) 94%);
@@ -32,15 +26,12 @@
     }
 
     .clamp-text {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
 
     .img-course {
-        height: 310px;
+        height: 100%;
+        width: 100%;
+        margin: 20px 0px;
     }
 
     .bg-fc {
@@ -51,14 +42,37 @@
         margin-top: 30px;
     }
 
-    .fnb div {
-        @media (max-width:1199px) {
-            height: 100%;
+    .fc div {
+        height: 43%;
+    }
+
+    @media (min-width:1200px) {
+        .img-course {
+            height: 330px;
         }
     }
 
-    .fc div {
-        height: 43%;
+    @media (max-width:1199px) {
+        .main-text {
+            font-size: 50px;
+        }
+
+        .fnb div {
+            height: 100%;
+        }
+
+        .img-course {
+            height: 200px;
+        }
+    }
+
+    @media (max-width:767px) {
+
+        .img-course {
+            height: 500px;
+            width: 500px;
+            margin-top: 0px;
+        }
     }
 </style>
 <div>
@@ -128,7 +142,7 @@
             <h3 class="font-weight-bold">Featured Course</h3>
             <div class="row">
                 <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_1}}" alt="Featured Course 1" class="img-fluid img-course">
+                    <img src="{{fcourse_1}}" alt="Featured Course 1" class="img-course">
                     <div class="d-flex">
                         <h4 class="clamp-text" title="ChatGPT & Leonard AI For Passive Income: Create E Book & Sell">
                             ChatGPT & Leonard AI For Passive Income: Create E Book & Sell</h4>
@@ -136,7 +150,7 @@
                 </div>
 
                 <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_2}}" alt="Featured Course 1" class="img-fluid img-course">
+                    <img src="{{fcourse_2}}" alt="Featured Course 1" class="img-course">
                     <div class="d-flex">
                         <h4 class="clamp-text" title="ChatGPT & Leonard AI For Passive Income: Create E Book & Sell">
                             Java Programming for Beginners</h4>
@@ -144,7 +158,7 @@
                 </div>
 
                 <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_3}}" alt="Featured Course 1" class="img-fluid img-course">
+                    <img src="{{fcourse_3}}" alt="Featured Course 1" class="img-course">
                     <div class="d-flex">
                         <h4>Problem Solving 101 for Children</h4>
                     </div>
