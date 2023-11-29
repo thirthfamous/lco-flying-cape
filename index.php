@@ -27,9 +27,32 @@ if (!file_exists('./config.php')) {
     die;
 }
 
+
+
 require_once('config.php');
 require_once($CFG->dirroot .'/course/lib.php');
 require_once($CFG->libdir .'/filelib.php');
+
+
+if (!isloggedin())
+{
+    $headcontext = [
+        'logo' => $OUTPUT->get_logo_url(),
+        'front' => $OUTPUT->image_url('front', 'theme'),
+        'fnb_1' => $OUTPUT->image_url('laptop', 'theme'),
+        'fnb_2' => $OUTPUT->image_url('team', 'theme'),
+        'fnb_3' => $OUTPUT->image_url('think', 'theme'),
+        'fcourse_1' => $OUTPUT->image_url('chatgpt', 'theme'),
+        'fcourse_2' => $OUTPUT->image_url('java', 'theme'),
+        'fcourse_3' => $OUTPUT->image_url('problem', 'theme'),
+        'rev_1' => $OUTPUT->image_url('rev_1', 'theme'),
+        'rev_2' => $OUTPUT->image_url('rev_2', 'theme'),
+        'rev_3' => $OUTPUT->image_url('rev_3', 'theme'),
+        'person' => $OUTPUT->image_url('person', 'theme'),
+    ];
+    echo $OUTPUT->render_from_template('theme_boost/landing_page', $headcontext);
+    die;
+}
 
 redirect_if_major_upgrade_required();
 
