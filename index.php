@@ -49,6 +49,7 @@ if (!isloggedin())
         'rev_2' => $OUTPUT->image_url('rev_2', 'theme'),
         'rev_3' => $OUTPUT->image_url('rev_3', 'theme'),
         'person' => $OUTPUT->image_url('person', 'theme'),
+        'lms2' => $OUTPUT->image_url('lms2', 'theme'),
     ];
     echo $OUTPUT->render_from_template('theme_boost/landing_page', $headcontext);
     die;
