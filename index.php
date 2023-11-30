@@ -38,7 +38,7 @@ if (!isloggedin())
 {
     $headcontext = [
         'logo' => $OUTPUT->get_logo_url(),
-        'front' => $OUTPUT->image_url('front', 'theme'),
+        'front' => $OUTPUT->image_url('background', 'theme'),
         'fnb_1' => $OUTPUT->image_url('laptop', 'theme'),
         'fnb_2' => $OUTPUT->image_url('team', 'theme'),
         'fnb_3' => $OUTPUT->image_url('think', 'theme'),
