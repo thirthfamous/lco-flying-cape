@@ -40,7 +40,7 @@ if (!isloggedin())
 
     $query = "SELECT mc.*
     FROM mdl_course mc, mdl_local_featured_course mlfc 
-    WHERE mc.id = mlfc.courseid";
+    WHERE mc.id = mlfc.courseid LIMIT 3";
 
     $featuredcourses = $DB->get_records_sql($query);
 
