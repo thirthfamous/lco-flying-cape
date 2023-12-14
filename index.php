@@ -36,6 +36,20 @@ require_once($CFG->libdir .'/filelib.php');
 
 if (!isloggedin())
 {
+    global $DB;
+
+    $query = "SELECT mc.*
+    FROM mdl_course mc, mdl_local_featured_course mlfc 
+    WHERE mc.id = mlfc.courseid";
+
+    $featuredcourses = $DB->get_records_sql($query);
+
+    foreach ($featuredcourses as $f) {
+        $f->image = \core_course\external\course_summary_exporter::get_course_image($f);
+    }
+
+    $fc = array_values($featuredcourses);
+
     $headcontext = [
         'logo' => $OUTPUT->get_logo_url(),
         'front' => $OUTPUT->image_url('background', 'theme'),
@@ -50,6 +64,7 @@ if (!isloggedin())
         'rev_3' => $OUTPUT->image_url('rev_3', 'theme'),
         'person' => $OUTPUT->image_url('person', 'theme'),
         'lms2' => $OUTPUT->image_url('lms2', 'theme'),
+        'featuredcourse' => $fc
     ];
     echo $OUTPUT->render_from_template('theme_boost/landing_page', $headcontext);
     die;

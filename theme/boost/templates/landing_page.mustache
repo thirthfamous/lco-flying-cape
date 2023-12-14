@@ -155,28 +155,15 @@
         <section class="container py-4 text-center">
             <h3 class="font-weight-bold">Featured Course</h3>
             <div class="row">
-                <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_1}}" alt="Featured Course 1" class="img-course">
-                    <div class="d-flex">
-                        <h4 class="clamp-text" title="ChatGPT & Leonard AI For Passive Income: Create E Book & Sell">
-                            ChatGPT & Leonard AI For Passive Income: Create E Book & Sell</h4>
+                {{#featuredcourse}}
+                    <div class="col-md-4 border d-flex flex-column align-items-center fnb">
+                        <img src="{{image}}" alt="{{fullname}}" class="img-course">
+                        <div class="d-flex">
+                            <h4 class="clamp-text" title="{{fullname}}">
+                                {{fullname}}</h4>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_2}}" alt="Featured Course 1" class="img-course">
-                    <div class="d-flex">
-                        <h4 class="clamp-text" title="ChatGPT & Leonard AI For Passive Income: Create E Book & Sell">
-                            Java Programming for Beginners</h4>
-                    </div>
-                </div>
-
-                <div class="col-md-4 border d-flex flex-column align-items-center fnb">
-                    <img src="{{fcourse_3}}" alt="Featured Course 1" class="img-course">
-                    <div class="d-flex">
-                        <h4>Problem Solving 101 for Children</h4>
-                    </div>
-                </div>
+                {{/featuredcourse}}
             </div>
     </div>
     </section>
